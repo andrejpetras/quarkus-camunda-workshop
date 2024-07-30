@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_19oknjx" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.8.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0">
+  <bpmn:process id="parameter-process" name="parameter-process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1d45cqw</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1d45cqw" sourceRef="StartEvent_1" targetRef="create-parameter" />
+    <bpmn:sequenceFlow id="Flow_1w602u4" sourceRef="create-parameter" targetRef="update-description" />
+    <bpmn:endEvent id="Event_0d6q09v">
+      <bpmn:incoming>Flow_1933rs8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1933rs8" sourceRef="println-parameter" targetRef="Event_0d6q09v" />
+    <bpmn:serviceTask id="create-parameter" name="create-parameter">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="create-parameter" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1d45cqw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1w602u4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="println-parameter" name="println-parameter">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="println-parameter" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0yu962r</bpmn:incoming>
+      <bpmn:outgoing>Flow_1933rs8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0plucui" sourceRef="update-description" targetRef="update-metadata-reactive" />
+    <bpmn:serviceTask id="update-description" name="update-description">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="update-description" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1w602u4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0plucui</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0yu962r" sourceRef="update-metadata-reactive" targetRef="println-parameter" />
+    <bpmn:serviceTask id="update-metadata-reactive" name="update-metadata-reactive">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="update-metadata-reactive" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0plucui</bpmn:incoming>
+      <bpmn:outgoing>Flow_0yu962r</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="parameter-process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0d6q09v_di" bpmnElement="Event_0d6q09v">
+        <dc:Bounds x="902" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0epbhkq_di" bpmnElement="create-parameter">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1n6cvqd_di" bpmnElement="println-parameter">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vjkbu7_di" bpmnElement="update-description">
+        <dc:Bounds x="420" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_110qjgj_di" bpmnElement="update-metadata-reactive">
+        <dc:Bounds x="620" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1d45cqw_di" bpmnElement="Flow_1d45cqw">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w602u4_di" bpmnElement="Flow_1w602u4">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="420" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1933rs8_di" bpmnElement="Flow_1933rs8">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="902" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0plucui_di" bpmnElement="Flow_0plucui">
+        <di:waypoint x="520" y="117" />
+        <di:waypoint x="620" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yu962r_di" bpmnElement="Flow_0yu962r">
+        <di:waypoint x="720" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
